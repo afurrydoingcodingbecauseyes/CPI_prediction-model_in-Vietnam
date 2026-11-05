@@ -69,7 +69,7 @@ st.title("Predicting CPI by Date")
     # 2.2 Graph drawing
 fig = px.scatter(df, x="Start Year", y="CPI", title="Data and Regression Line")
 x_range = [[i] for i in range(1989, 2050)]
-y_pred = disasters_model.predict(x_range)
+y_pred = year_model.predict(x_range)
 fig.add_scatter(
     x=list(range(1989, 2050)), 
     y=y_pred,
