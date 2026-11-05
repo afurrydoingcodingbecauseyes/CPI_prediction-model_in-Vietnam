@@ -43,10 +43,14 @@ fig.update_xaxes(title_text="Disasters Since 1989")
 st.plotly_chart(fig, use_container_width=True)
 
 
-# 3. Disaster Values
-number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
+# 3. Create Col
+col1, col2 = st.columns([3, 1])
+
+# 4. Disaster Values Slider
+with col1:
+    number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
 
 # 4. Predict
-if st.button("Predict"):
-    cpi = disasters_model.predict([[number_of_disasters]])[0]
+cpi = disasters_model.predict([[number_of_disasters]])[0]
+with col2:
     st.metric("Predicted CPI", f"{cpi:.2f}")
