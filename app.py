@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 import pandas as pd
 import plotly.express as px
+from datetime import date
  
 st.set_page_config(page_title="Predicting CPI of Vietnam", layout="wide")
 
@@ -17,11 +18,8 @@ year_model = load_model_year()
  
 disasters_model = load_model_disasters()
 
-# Disaster -> CPI
-st.title("Predicting CPI by number of disasters")
+# 2. Dataframe
 
-# 2. First Graph
-    # 2.1 DataFrame
 df = pd.read_csv("data/data.csv")
 df = df[df["Start Year"] > 1967]
 df  = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
@@ -29,6 +27,11 @@ df = df.dropna(subset = "Total Damage, Adjusted ('000 US$)")
 df[["Sum"]] = df.groupby(["Start Year"])[["CPI"]].transform("count")
 df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].transform("sum")
 df["cumsum"] = df["Sum"].cumsum()
+
+# Disaster -> CPI
+st.title("Predicting CPI by number of disasters")
+
+# 2. First Graph
 
     # 2.2 Graph drawing
 fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
@@ -56,3 +59,23 @@ with col1:
 cpi = disasters_model.predict([[number_of_disasters]])[0]
 with col2:
     st.metric("Predicted CPI", f"{cpi:.2f}")
+
+
+# Disaster -> Date
+st.title("Predicting CPI by Date")
+
+# 2. First Graph
+
+    # 2.2 Graph drawing
+fig = px.scatter(df, x="Start Year", y="CPI", title="Data and Regression Line")
+x_range = [[i] for i in range(1989, 2050)]
+y_pred = disasters_model.predict(x_range)
+fig.add_scatter(
+    x=list(range(1989, 2050)), 
+    y=y_pred,
+    mode="lines", name="Regression Line",
+    line=dict(color="red")
+)
+fig.update_xaxes(title_text="Year")
+    # 2.3 Render
+st.plotly_chart(fig, use_container_width=True)
