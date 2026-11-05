@@ -27,6 +27,9 @@ df["Sum"] = df.groupby(["Start Year"])[["CPI"]].transform("count")
 df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].sum()
 df["cumsum"] = df["Sum"].cumsum()
 
+# Disaster -> CPI
+st.title("Predicting CPI by Date")
+
 # 2. First Graph
 
     # 2.2 Graph drawing
@@ -57,7 +60,7 @@ with col2:
     st.metric("Predicted CPI", f"{cpi:.2f}")
 
 
-# Disaster -> Date
+# Date -> CPI
 st.title("Predicting CPI by Date")
 
 # 2. First Graph
