@@ -61,7 +61,7 @@ fig.add_vline(
     x=number_of_disasters,
     line_dash="dash",
     line_color="green",
-    annotation_text=f"Selected: {number_of_disasters}",
+    annotation_text=f"Selected: {st.metric("Predicted CPI", f"{predicted_cpi:.2f}")}",
 )
 
 # Point showing predicted CPI
@@ -70,7 +70,7 @@ fig.add_scatter(
     y=[predicted_cpi],
     mode="markers",
     marker=dict(size=15, color="green", symbol="circle"),
-    name=st.metric("Predicted CPI", f"{predicted_cpi:.2f}"),
+    name="Prediction",
 )
 
 fig.update_xaxes(title_text="Disasters Since 1989")
