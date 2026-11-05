@@ -40,7 +40,8 @@ df["cumsum"] = df["Sum"].cumsum()
 fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
 x_range = [[i] for i in range(0, 41)]
 y_pred = disasters_model.predict(x_range)
-fig.add_scatter(x=list(range(0, 41)), y=y_pred,
+fig.add_scatter(x=list(range(0, 700)), y=y_pred,
                 mode="lines", name="Regression Line",
-                line=dict(color="red"))
+                line=dict(color="red"),
+                xlabel="Disasters since 1989")
 st.plotly_chart(fig, use_container_width=True)
