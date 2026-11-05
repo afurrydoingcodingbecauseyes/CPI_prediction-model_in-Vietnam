@@ -23,7 +23,7 @@ df = pd.read_csv("data/data.csv")
 df = df[df["Start Year"] > 1967]
 df  = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
 df = df.dropna(subset = "Total Damage, Adjusted ('000 US$)")
-df[["Sum"]] = df.groupby(["Start Year"])[["CPI"]].transform("count")
+df["Sum"] = df.groupby(["Start Year"])[["CPI"]].transform("count")
 df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].sum()
 df["cumsum"] = df["Sum"].cumsum()
 
