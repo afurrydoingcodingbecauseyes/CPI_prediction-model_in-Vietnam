@@ -30,10 +30,10 @@ df["cumsum"] = df["Sum"].cumsum()
 
     # 2.2 Graph drawing
 fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
-x_range = [[i] for i in range(0, 750)]
+x_range = [[i] for i in range(0, 1000)]
 y_pred = disasters_model.predict(x_range)
 fig.add_scatter(
-    x=list(range(0, 700)), 
+    x=list(range(0, 1000)), 
     y=y_pred,
     mode="lines", name="Regression Line",
     line=dict(color="red")
