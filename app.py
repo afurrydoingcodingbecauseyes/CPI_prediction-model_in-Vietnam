@@ -69,8 +69,8 @@ fig.add_scatter(
     x=[number_of_disasters],
     y=[predicted_cpi],
     mode="markers",
-    marker=dict(size=12, color="blue", symbol="star"),
-    name="Prediction",
+    marker=dict(size=15, color="green", symbol="circle"),
+    name=st.metric("Predicted CPI", f"{predicted_cpi:.2f}"),
 )
 
 fig.update_xaxes(title_text="Disasters Since 1989")
@@ -78,7 +78,3 @@ fig.update_xaxes(title_text="Disasters Since 1989")
 # 4.3 Render Graph
 st.plotly_chart(fig, use_container_width=True)
 
-
-# 5. Predict
-if st.button("Predict"):
-  st.metric("Predicted CPI", f"{predicted_cpi:.2f}")
