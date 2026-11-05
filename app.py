@@ -49,7 +49,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 # 3. Create Col
-col1, col2 = st.columns([3, 1])
+col1, col2 = st.columns([2, 1])
 
 # 4. Disaster Values Slider
 with col1:
@@ -79,3 +79,14 @@ fig.add_scatter(
 fig.update_xaxes(title_text="Year")
     # 2.3 Render
 st.plotly_chart(fig, use_container_width=True)
+
+# 3. Create Col
+col3, col4 = st.columns([2, 1])
+
+# 4. Disaster Values Slider
+with col3:
+    year = st.slider(label="Date", min_value=1989, max_value=2050, step=None)
+ # 4. Predict
+cpi = year_model.predict([[year]])[0]
+with col4:
+    st.metric("Predicted CPI", f"{cpi:.2f}")
