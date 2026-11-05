@@ -53,7 +53,7 @@ col1, col2 = st.columns([2, 1])
 
 # 4. Disaster Values Slider
 with col1:
-    number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
+    number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=2000, step=1)
 
 # 4. Predict
 cpi = disasters_model.predict([[number_of_disasters]])[0]
@@ -85,7 +85,7 @@ col3, col4 = st.columns([2, 1])
 
 # 4. Disaster Values Slider
 with col3:
-    year = st.slider(label="Date", min_value=1989, max_value=2050, step=None)
+    year = st.slider(label="Date", min_value=1989, max_value=2050, step=1/31536000)
  # 4. Predict
 cpi = year_model.predict([[year]])[0]
 with col4:
