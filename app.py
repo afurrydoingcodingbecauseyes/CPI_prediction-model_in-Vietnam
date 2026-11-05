@@ -18,16 +18,8 @@ year_model = load_model_year()
  
 disasters_model = load_model_disasters()
 
-# 2. Value
-number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
-
-# 3. Predict
-if st.button("Predict"):
-    diem = disasters_model.predict([[number_of_disasters]])[0]
-    st.metric("Predicted CPI", f"{diem:.2f}")
-
-# 4. Graph
-    # 4.1 DataFrame
+# 2. First Graph
+    # 2.1 DataFrame
 df = pd.read_csv("data/data.csv")
 df = df[df["Start Year"] > 1967]
 df  = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
@@ -36,7 +28,7 @@ df[["Sum"]] = df.groupby(["Start Year"])[["CPI"]].transform("count")
 df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].transform("sum")
 df["cumsum"] = df["Sum"].cumsum()
 
-    # 4.2 Graph drawing
+    # 2.2 Graph drawing
 fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
 x_range = [[i] for i in range(0, 750)]
 y_pred = disasters_model.predict(x_range)
@@ -46,6 +38,14 @@ fig.add_scatter(
     mode="lines", name="Regression Line",
     line=dict(color="red")
 )
+
+# 3. Disaster Values
+number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
+
+# 4. Predict
+if st.button("Predict"):
+    diem = disasters_model.predict([[number_of_disasters]])[0]
+    st.metric("Predicted CPI", f"{diem:.2f}")
 
 fig.update_xaxes(title_text="Disasters Since 1989")
 
