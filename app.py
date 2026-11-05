@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.express as px
  
 st.set_page_config(page_title="Predicting CPI of Vietnam", layout="wide")
-st.title("Predicting CPI by nmber of disasters")
 
 
 # 1. Load model
@@ -17,6 +16,9 @@ def load_model_disasters():
 year_model = load_model_year()
  
 disasters_model = load_model_disasters()
+
+# Disaster -> CPI
+st.title("Predicting CPI by number of disasters")
 
 # 2. First Graph
     # 2.1 DataFrame
