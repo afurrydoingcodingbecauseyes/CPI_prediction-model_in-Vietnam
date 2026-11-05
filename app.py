@@ -38,7 +38,7 @@ df["cumsum"] = df["Sum"].cumsum()
 
     # 4.2 Graph drawing
 fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
-x_range = [[i] for i in range(0, 41)]
+x_range = [[i] for i in range(0, 750)]
 y_pred = disasters_model.predict(x_range)
 fig.add_scatter(
     x=list(range(0, 700)), 
