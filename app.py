@@ -19,7 +19,7 @@ year_model = load_model_year()
 disasters_model = load_model_disasters()
 
 # 2. Value
-number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0.0, max_value=1000, step=1)
+number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=1000, step=1)
 
 # 3. Predict
 if st.button("Predict"):
