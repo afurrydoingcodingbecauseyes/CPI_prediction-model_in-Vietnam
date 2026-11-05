@@ -19,22 +19,12 @@ year_model = load_model_year()
 disasters_model = load_model_disasters()
 
 # 2. Dataframe
-
 df = pd.read_csv("data/data.csv")
 df = df[df["Start Year"] > 1967]
-df = df.dropna(subset=["Total Damage, Adjusted ('000 US$)"])
-# Disaster -> CPI
-st.title("Predicting CPI by number of disasters")
-
-df = (
-    df.groupby("Start Year")
-    .agg(
-        Sum=("CPI", "count"),
-        Total_Damage=("Total Damage, Adjusted ('000 US$)", "sum"),
-    )
-    .reset_index()
-)
-
+df  = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
+df = df.dropna(subset = "Total Damage, Adjusted ('000 US$)")
+df[["Sum"]] = df.groupby(["Start Year"])[["CPI"]].transform("count")
+df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].sum()
 df["cumsum"] = df["Sum"].cumsum()
 
 # 2. First Graph
