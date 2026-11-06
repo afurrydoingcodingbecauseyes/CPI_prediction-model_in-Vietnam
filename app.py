@@ -6,7 +6,6 @@ from datetime import date
  
 st.set_page_config(page_title="Home page", layout="wide")
 
-st.sidebar.page_link("", label="Home Page")
 st.sidebar.page_link("pages/1_predict.py", label="Predict")
 
 
