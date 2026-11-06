@@ -63,7 +63,14 @@ with col2:
 # Date -> CPI
 st.title("Predicting CPI by Date")
 
-# 2. First Graph
+# 4. Disaster Values Slider
+year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
+
+# Predict
+cpi = year_model.predict([[year]])[0]
+st.metric("Predicted CPI", f"{cpi:.2f}")
+
+# First Graph
 cpi = year_model.predict([[year]])[0]
     # 2.2 Graph drawing
 fig = px.line(df, x="Start Year", y="CPI", title="Data and Regression Line")
@@ -76,11 +83,11 @@ fig.add_scatter(
     line=dict(color="red", dash="dash"),
 )
 fig.update_xaxes(title_text="Year")
-    # 2.3 Vert Line
+    # Vert Line
 fig.add_vline(
     x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year"
 )
-    # 2.4 Prediction point
+    # Prediction point
 fig.add_scatter(
     x=[year],
     y=[cpi],
@@ -89,16 +96,5 @@ fig.add_scatter(
     marker=dict(color="red", size=12, symbol="circle"),
 )
 
-    # 2.4 Render
+    # Render
 st.plotly_chart(fig, use_container_width=True)
-
-# 3. Create Col
-col3, col4, col5,col6 = st.columns([3, 1,1,1])
-
-# 4. Disaster Values Slider
-with col3:
-    year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
- # 4. Predict
-cpi = year_model.predict([[year]])[0]
-with col5:
-    st.metric("Predicted CPI", f"{cpi:.2f}")
