@@ -64,7 +64,7 @@ with col2:
 st.title("Predicting CPI by Date")
 
 # 4. Disaster Values Slider
-year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
+year = st.slider(label="Year", min_value=2022, max_value=2050, step=1)
 
 # Predict
 cpi = year_model.predict([[year]])[0]
