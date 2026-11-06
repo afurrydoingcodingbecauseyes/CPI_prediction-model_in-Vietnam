@@ -80,7 +80,7 @@ fig.update_xaxes(title_text="Year")
 st.plotly_chart(fig, use_container_width=True)
 
 # 3. Create Col
-col3, col4 = st.columns([1, 1])
+col3, col4, col5 = st.columns([1, 1,1])
 
 # 4. Disaster Values Slider
 with col3:
