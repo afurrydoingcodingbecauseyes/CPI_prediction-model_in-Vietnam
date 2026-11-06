@@ -153,18 +153,18 @@ elif selected_page == "Predict":
 	
 	# Disaster Values Slider
 	with col5:
-	    year = st.slider(label="Damage since 1989 (100000 US$)", min_value=0, max_value=(5*(10**7)), step=1)
+	    damage = st.slider(label="Damage since 1989 (100000 US$)", min_value=0, max_value=(5*(10**7)), step=1)
 	
 	# Predict
 	with col6:
-	    cpi = damage_model.predict([[year]])[0]
+	    cpi = damage_model.predict([[damage]])[0]
 	    st.metric("Predicted CPI", f"{cpi:.2f}")
 	
 	# Graph
 	    # 2.2 Graph drawing
 	fig = px.line(df, x="damage_cumsum", y="CPI", title="Data and Regression Line")
 	x_range = [[i] for i in range(0, upper_range)]
-	y_pred = year_model.predict(x_range)
+	y_pred = damage_model.predict(x_range)
 	fig.update_xaxes(title_text="Year")
 	
 	    # Regression Line
@@ -176,7 +176,7 @@ elif selected_page == "Predict":
 	)
 	    # Prediction point
 	fig.add_scatter(
-	    x=[year],
+	    x=[damage],
 	    y=[cpi],
 	    mode="markers",
 	    name=f"Prediction: ({year}, {cpi:.2f})",
