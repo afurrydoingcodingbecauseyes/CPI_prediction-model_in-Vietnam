@@ -64,7 +64,7 @@ with col2:
 st.title("Predicting CPI by Date")
 
 # 2. First Graph
-
+cpi = year_model.predict([[year]])[0]
     # 2.2 Graph drawing
 fig = px.line(df, x="Start Year", y="CPI", title="Data and Regression Line")
 x_range = [[i] for i in range(1989, 2050)]
