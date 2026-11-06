@@ -167,7 +167,7 @@ elif selected_page == "Predict":
 	
 	    # Regression Line
 	fig.add_scatter(
-	    x=list(range(0, 3.5*(10**7)), 
+	    x=list(range(0, 3.5*(10**7))), 
 	    y=y_pred,
 	    mode="lines", name="Regression Line",
 	    line=dict(color="red", dash="dash"),
