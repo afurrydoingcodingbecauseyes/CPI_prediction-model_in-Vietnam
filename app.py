@@ -26,9 +26,13 @@ elif selected_page == "Predict":
     
     def load_model_disasters():
         return joblib.load("predCPI_disasterAmount.pkl")
+
+	def load_model_damage():
+    	return joblib.load("pred_CPI_disasterDamage.pkl")
      
     year_model = load_model_year()
     disasters_model = load_model_disasters()
+	damage_model = load_model_damage()
     
     # 2. Dataframe
     df = pd.read_csv("data/data.csv")
