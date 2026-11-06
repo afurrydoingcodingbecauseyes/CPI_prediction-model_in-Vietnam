@@ -28,7 +28,7 @@ df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Dama
 df["cumsum"] = df["Sum"].cumsum()
 
 # Disaster -> CPI
-st.title("Predicting CPI by Date")
+st.title("Predicting CPI by Disasters")
 
 # 2. First Graph
 
