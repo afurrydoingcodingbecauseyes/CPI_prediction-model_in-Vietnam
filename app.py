@@ -63,7 +63,7 @@ with col2:
 # Date -> CPI
 st.title("Predicting CPI by Date")
 
-col3, blank , col4 = st.columns([4, 1,2])
+col3, col4 = st.columns([3,2])
 
 # Disaster Values Slider
 with col3:
