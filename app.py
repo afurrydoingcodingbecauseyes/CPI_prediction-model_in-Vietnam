@@ -6,7 +6,7 @@ from datetime import date
  
 st.set_page_config(page_title="Vietnam CPI predictor based on natural disasters", layout="wide")
 
-selected_page = st.sidebar.radio("Navigation", ["Home", "Predict"])
+selected_page = st.sidebar.radio("Navigation", ["Home", "Predict", "Data"])
 
 
 if selected_page == "Home":
@@ -163,3 +163,6 @@ elif selected_page == "Predict":
     )
     
     st.plotly_chart(fig3, use_container_width=True)
+elif selected_page == "Data":
+    st.title("Data")
+    st.table(df)
