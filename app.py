@@ -138,7 +138,7 @@ elif selected_page == "Predict":
         st.metric("Predicted CPI", f"{cpi_damage:.2f}")
     
     # Graph 3
-    fig3 = px.line(df, x="damage_cumsum", y="CPI", title="Data and Regression Line (CPI vs Total Damage)")
+    fig3 = px.scatter(df, x="damage_cumsum", y="CPI", title="Data and Regression Line (CPI vs Total Damage)")
     x_range_damage = [[i] for i in range(0, upper_range, 100000)]
     y_pred_damage = damage_model.predict(x_range_damage)
     fig3.update_xaxes(title_text="Total Damage ('000 US$)")
