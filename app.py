@@ -73,7 +73,7 @@ fig.add_scatter(
     x=list(range(1989, 2050)), 
     y=y_pred,
     mode="lines", name="Regression Line",
-    line=dict(color="red")
+    line=dict(color="red", dash="dash"),
 )
 fig.update_xaxes(title_text="Year")
     # 2.3 Render
