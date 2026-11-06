@@ -76,7 +76,20 @@ fig.add_scatter(
     line=dict(color="red", dash="dash"),
 )
 fig.update_xaxes(title_text="Year")
-    # 2.3 Render
+    # 2.3 Vert Line
+fig.add_vline(
+    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year"
+)
+    # 2.4 Prediction point
+fig.add_scatter(
+    x=[year],
+    y=[cpi],
+    mode="markers",
+    name=f"Prediction: ({year}, {cpi:.2f})",
+    marker=dict(color="red", size=12, symbol="circle"),
+)
+
+    # 2.4 Render
 st.plotly_chart(fig, use_container_width=True)
 
 # 3. Create Col
