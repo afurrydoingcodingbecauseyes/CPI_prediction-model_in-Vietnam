@@ -87,5 +87,5 @@ with col3:
     year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
  # 4. Predict
 cpi = year_model.predict([[year]])[0]
-with col6:
+with col5:
     st.metric("Predicted CPI", f"{cpi:.2f}")
