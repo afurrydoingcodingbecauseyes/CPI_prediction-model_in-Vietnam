@@ -91,8 +91,7 @@ fig.add_scatter(
     marker=dict(color="red", size=10, symbol="circle"),
 )
 
- 
-)
+
 fig.update_xaxes(title_text="Year")
     # Vert Line
 fig.add_vline(
