@@ -89,7 +89,7 @@ fig.add_scatter(
     x=[year],
     y=[cpi],
     mode="markers",
-    label=f"Prediction: ({year}, {cpi:.2f})",
+    name=f"Prediction: ({year}, {cpi:.2f})",
     marker=dict(color="red", size=10, symbol="circle"),
 )
 
