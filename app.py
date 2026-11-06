@@ -174,5 +174,5 @@ elif selected_page == "Data":
     df = df.drop_duplicates()
     df["cumsum"] = df["Sum"].cumsum()
     df["damage_cumsum"] = df["Total Damage, Adjusted ('000 US$)"].cumsum()
-    df = df.rename(columns={"damage_cumsum": "Cumulative Total Damage", "cumsum": "Cumulative Disaster"})
+    df = df.rename(columns={"damage_cumsum": "Cumulative Total Damage", "cumsum": "Cumulative Disaster","Sum":"Nummber of disasters","CPI":"CPI (2022 base)"})
     st.table(df)
