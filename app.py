@@ -15,7 +15,7 @@ if selected_page == "Home":
     st.markdown(
         """
         1. See the analyzation disasters data
-        2. Add training data
+        2. View the training data
         3. Predict the CPI based on data
         """
     )
