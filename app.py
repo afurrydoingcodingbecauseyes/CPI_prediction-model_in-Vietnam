@@ -26,10 +26,15 @@ elif selected_page == "Predict":
 	
 	def load_model_disasters():
 	    return joblib.load("predCPI_disasterAmount.pkl")
+
+	def load_model_damage():
+	    return joblib.load("predCPI_disasterDamage.pkl")
 	 
 	year_model = load_model_year()
 	 
 	disasters_model = load_model_disasters()
+
+	damage_model = load_model_damage()
 	
 	# 2. Dataframe
 	df = pd.read_csv("data/data.csv")
@@ -41,6 +46,8 @@ elif selected_page == "Predict":
 	df["Total Damage, Adjusted ('000 US$)"] = df.groupby(["Start Year"])["Total Damage, Adjusted ('000 US$)"].transform("sum")
 	df = df.drop_duplicates()
 	df["cumsum"] = df["Sum"].cumsum()
+	df["damage_cumsum"] = df["Total Damage, Adjusted ('000 US$)"].cumsum()
+
 	
 	# Disaster -> CPI
 	st.title("Predicting CPI by Disasters")
@@ -136,3 +143,49 @@ elif selected_page == "Predict":
 	
 	    # Render
 	st.plotly_chart(fig, use_container_width=True)
+
+	# Damage -> CPI
+	st.title("Predicting CPI by Total damage since 1989")
+	
+	col5, col6 = st.columns([3,1])
+	
+	# Disaster Values Slider
+	with col5:
+	    year = st.slider(label="Damage since 1989 (100000 US$)", min_value=0, max_value=(5*(10**7)), step=1)
+	
+	# Predict
+	with col6:
+	    cpi = damage_model.predict([[year]])[0]
+	    st.metric("Predicted CPI", f"{cpi:.2f}")
+	
+	# Graph
+	    # 2.2 Graph drawing
+	fig = px.line(df, x="damage_cumsum", y="CPI", title="Data and Regression Line")
+	x_range = [[i] for i in range(0, 3.5*(10**7))]
+	y_pred = year_model.predict(x_range)
+	fig.update_xaxes(title_text="Year")
+	
+	    # Regression Line
+	fig.add_scatter(
+	    x=list(range(0, 3.5*(10**7)), 
+	    y=y_pred,
+	    mode="lines", name="Regression Line",
+	    line=dict(color="red", dash="dash"),
+	)
+	    # Prediction point
+	fig.add_scatter(
+	    x=[year],
+	    y=[cpi],
+	    mode="markers",
+	    name=f"Prediction: ({year}, {cpi:.2f})",
+	    marker=dict(color="red", size=10, symbol="circle"),
+	    text=f"{cpi:.2f}"
+	)
+	
+	    # Vert Line
+	fig.add_vline(
+	    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", annotation_text= f"Year: {year}"
+	)
+	
+	    # Render
+	st.plotly_chart(fig, use_container_width=True)	
