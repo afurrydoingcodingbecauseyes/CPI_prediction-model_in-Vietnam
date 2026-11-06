@@ -69,7 +69,7 @@ fig.add_scatter(
 
     # Vert Line
 fig.add_vline(
-    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", annotation_text= f"{number_of_disasters} disasters"
+    x=number_of_disasters, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", annotation_text= f"{number_of_disasters} disasters"
 )
 
     # Render
