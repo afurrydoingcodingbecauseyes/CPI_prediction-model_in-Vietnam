@@ -3,11 +3,10 @@ import joblib
 import pandas as pd
 import plotly.express as px
 from datetime import date
- 
+
 st.set_page_config(page_title="Vietnam CPI predictor based on natural disasters", layout="wide")
 
 selected_page = st.sidebar.radio("Navigation", ["Home", "Predict", "Data"])
-
 
 if selected_page == "Home":
     st.title("CPI predictor using natural disasters data")
@@ -165,7 +164,7 @@ elif selected_page == "Predict":
     st.plotly_chart(fig3, use_container_width=True)
 elif selected_page == "Data":
     st.title("Data")
-	
+    
     df = pd.read_csv("data/data.csv")
     df = df[df["Start Year"] >= 1989]
     df = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
@@ -175,5 +174,5 @@ elif selected_page == "Data":
     df = df.drop_duplicates()
     df["cumsum"] = df["Sum"].cumsum()
     df["damage_cumsum"] = df["Total Damage, Adjusted ('000 US$)"].cumsum()
-	df = df.rename(columns={"damage_cumsum": "Cumulative Total Damage", "cumsum": "Cumulative Disaster"})
+    df = df.rename(columns={"damage_cumsum": "Cumulative Total Damage", "cumsum": "Cumulative Disaster"})
     st.table(df)
