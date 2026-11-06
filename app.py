@@ -80,12 +80,12 @@ fig.update_xaxes(title_text="Year")
 st.plotly_chart(fig, use_container_width=True)
 
 # 3. Create Col
-col3, col4, col5 = st.columns([1, 1,1])
+col3, col4, col5,col6 = st.columns([3, 1,1,1])
 
 # 4. Disaster Values Slider
 with col3:
     year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
  # 4. Predict
 cpi = year_model.predict([[year]])[0]
-with col4:
+with col6:
     st.metric("Predicted CPI", f"{cpi:.2f}")
