@@ -21,7 +21,6 @@ year_model = load_model_year()
 disasters_model = load_model_disasters()
 
 # 2. Dataframe
-@st.cache_data
 df = pd.read_csv("data/data.csv")
 df = df[df["Start Year"] > 1967]
 df  = df[["Start Year", "CPI", "Total Damage, Adjusted ('000 US$)"]]
