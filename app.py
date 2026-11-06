@@ -70,18 +70,20 @@ year = st.slider(label="Year", min_value=1989, max_value=2050, step=1)
 cpi = year_model.predict([[year]])[0]
 st.metric("Predicted CPI", f"{cpi:.2f}")
 
-# First Graph
-cpi = year_model.predict([[year]])[0]
+# Graph
     # 2.2 Graph drawing
 fig = px.line(df, x="Start Year", y="CPI", title="Data and Regression Line")
 x_range = [[i] for i in range(1989, 2050)]
 y_pred = year_model.predict(x_range)
+fig.update_xaxes(title_text="Year")
+
+    # Regression Line
 fig.add_scatter(
     x=list(range(1989, 2050)), 
     y=y_pred,
     mode="lines", name="Regression Line",
     line=dict(color="red", dash="dash"),
-
+)
     # Prediction point
 fig.add_scatter(
     x=[year],
@@ -91,8 +93,6 @@ fig.add_scatter(
     marker=dict(color="red", size=10, symbol="circle"),
 )
 
-
-fig.update_xaxes(title_text="Year")
     # Vert Line
 fig.add_vline(
     x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", s= f"Year: {year}"
