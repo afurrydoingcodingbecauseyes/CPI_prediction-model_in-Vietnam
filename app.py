@@ -91,11 +91,12 @@ fig.add_scatter(
     mode="markers",
     name=f"Prediction: ({year}, {cpi:.2f})",
     marker=dict(color="red", size=10, symbol="circle"),
+    text=f"{cpi:.2f}"
 )
 
     # Vert Line
 fig.add_vline(
-    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", s= f"Year: {year}"
+    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", annotation_text= f"Year: {year}"
 )
 
     # Render
