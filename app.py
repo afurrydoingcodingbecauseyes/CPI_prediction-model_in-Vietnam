@@ -146,6 +146,8 @@ elif selected_page == "Predict":
 
 	# Damage -> CPI
 	st.title("Predicting CPI by Total damage since 1989")
+
+	upper_range = int(3.5*(10**7))
 	
 	col5, col6 = st.columns([3,1])
 	
@@ -161,13 +163,13 @@ elif selected_page == "Predict":
 	# Graph
 	    # 2.2 Graph drawing
 	fig = px.line(df, x="damage_cumsum", y="CPI", title="Data and Regression Line")
-	x_range = [[i] for i in range(0, 3.5*(10**7))]
+	x_range = [[i] for i in range(0, upper_range)]
 	y_pred = year_model.predict(x_range)
 	fig.update_xaxes(title_text="Year")
 	
 	    # Regression Line
 	fig.add_scatter(
-	    x=list(range(0, 3.5*(10**7))), 
+	    x=list(range(0, upper_range)), 
 	    y=y_pred,
 	    mode="lines", name="Regression Line",
 	    line=dict(color="red", dash="dash"),
