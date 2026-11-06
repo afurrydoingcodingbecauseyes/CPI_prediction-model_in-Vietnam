@@ -81,19 +81,22 @@ fig.add_scatter(
     y=y_pred,
     mode="lines", name="Regression Line",
     line=dict(color="red", dash="dash"),
-)
-fig.update_xaxes(title_text="Year")
-    # Vert Line
-fig.add_vline(
-    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year"
-)
+
     # Prediction point
 fig.add_scatter(
     x=[year],
     y=[cpi],
     mode="markers",
-    name=f"Prediction: ({year}, {cpi:.2f})",
-    marker=dict(color="red", size=12, symbol="circle"),
+    s=f"Prediction: ({year}, {cpi:.2f})",
+    marker=dict(color="red", size=10, symbol="circle"),
+)
+
+ 
+)
+fig.update_xaxes(title_text="Year")
+    # Vert Line
+fig.add_vline(
+    x=year, line_width=2, line_dash="dash", line_color="grey", name="Selected Year", s= f"Year: {year}"
 )
 
     # Render
