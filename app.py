@@ -118,3 +118,50 @@ elif selected_page == "Predict":
     )
     
     st.plotly_chart(fig2, use_container_width=True)
+	
+	# Damage -> CPI
+    st.title("Predicting CPI by Total Damage Since 1989")
+
+    upper_range = int(3.5 * (10**7))
+    
+    col5, col6 = st.columns([3, 1])
+    
+    # Disaster Damage Slider (Đã đổi tên biến từ 'year' thành 'total_damage' để tránh ghi đè)
+    with col5:
+        total_damage = st.slider(label="Damage since 1989 ('000 US$)", min_value=0, max_value=upper_range, step=1000)
+    
+    # Predict (Cần load damage_model = joblib.load("pred_CPI_disasterDamage.pkl") ở đầu file)
+    with col6:
+        cpi_damage = damage_model.predict([[total_damage]])[0]
+        st.metric("Predicted CPI", f"{cpi_damage:.2f}")
+    
+    # Graph 3
+    fig3 = px.line(df, x="damage_cumsum", y="CPI", title="Data and Regression Line (CPI vs Total Damage)")
+    x_range_damage = [[i] for i in range(0, upper_range, 100000)]
+    y_pred_damage = damage_model.predict(x_range_damage)  # Sử dụng damage_model thay vì year_model
+    fig3.update_xaxes(title_text="Total Damage ('000 US$)")
+    
+    # Regression Line
+    fig3.add_scatter(
+        x=list(range(0, upper_range, 100000)), 
+        y=y_pred_damage,
+        mode="lines", name="Regression Line",
+        line=dict(color="red", dash="dash"),
+    )
+    # Prediction point
+    fig3.add_scatter(
+        x=[total_damage],
+        y=[cpi_damage],
+        mode="markers",
+        name=f"Prediction: ({total_damage}, {cpi_damage:.2f})",
+        marker=dict(color="red", size=10, symbol="circle"),
+        text=f"{cpi_damage:.2f}"
+    )
+    
+    # Vert Line
+    fig3.add_vline(
+        x=total_damage, line_width=2, line_dash="dash", line_color="grey", name="Selected Damage", annotation_text=f"Damage: {total_damage}"
+    )
+    
+    # Render
+    st.plotly_chart(fig3, use_container_width=True)
