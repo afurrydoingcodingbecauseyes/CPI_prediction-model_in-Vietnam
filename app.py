@@ -13,9 +13,8 @@ if selected_page == "Home":
     st.header("Functions")
     st.markdown(
         """
-        1. See the analyzation disasters data
-        2. View the training data
-        3. Predict the CPI based on data
+        1. View the training data
+        2. Predict the CPI based on data
         """
     )
 elif selected_page == "Predict":
