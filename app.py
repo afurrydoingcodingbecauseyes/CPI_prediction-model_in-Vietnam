@@ -60,7 +60,7 @@ elif selected_page == "Predict":
     x_range = [[i] for i in range(0, 150)]
     y_pred = disasters_model.predict(x_range)
     fig.add_scatter(
-        x=list(range(0, 150)), 
+        x=list(range(0, 2000)), 
         y=y_pred,
         mode="lines", name="Regression Line",
         line=dict(color="red")
