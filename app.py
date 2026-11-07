@@ -49,7 +49,7 @@ elif selected_page == "Predict":
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=2000, step=1)
+        number_of_disasters = st.slider(label="Number of disasters since 1989", min_value=0, max_value=400, step=1)
     
     cpi = disasters_model.predict([[number_of_disasters]])[0]
     with col2:
@@ -57,10 +57,10 @@ elif selected_page == "Predict":
     
     # Graph 1
     fig = px.scatter(df, x="cumsum", y="CPI", title="Data and Regression Line")
-    x_range = [[i] for i in range(0, 150)]
+    x_range = [[i] for i in range(0, 300)]
     y_pred = disasters_model.predict(x_range)
     fig.add_scatter(
-        x=list(range(0, 2000)), 
+        x=list(range(0, 300)), 
         y=y_pred,
         mode="lines", name="Regression Line",
         line=dict(color="red")
